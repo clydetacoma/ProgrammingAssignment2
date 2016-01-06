@@ -3,6 +3,8 @@
 ## makeCacheMatrix creates a special "matrix" object that can cache its inverse.
 ## cacheSolve shows the inverse of a matrix if is in memory or computes the inverse and then shows the inverse
 
+
+
 ## Write a short comment describing this function
 ## This function creates a special "matrix" object that can cache its inverse.
 
@@ -19,6 +21,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
+
 ## Write a short comment describing this function
 ## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
 ## If the inverse has already been calculated (and the matrix has not changed), then the cachesolve should 
@@ -26,14 +29,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
   if(require("corpcor")){
-    print("corpcor is loaded correctly")
+    print("corpcor is installed")
   } else {
-    print("trying to install corpcor")
+    print("attempting to install corpcor")
     install.packages("corpcor")
-    if(require(corpcor)){
-      print("corpcor installed and loaded")
+    if(require("corpcor")){
+      print("corpcor is installed and loaded")
     } else {
-      stop("could not install corpcor")
+      stop("Error: couldn't install corpcor")
     }
   }
   inverse <- X$getinverse()
@@ -41,7 +44,7 @@ cacheSolve <- function(x, ...) {
     message("matrix is in memory")
     return(inverse)
   }
-  message("inverse is not in memory so the inverse (if exist) is gonna be computed")
+  message("inverse is not in memory so the inverse (if it exists) is going to be computed")
   data <- X$get()
   inverse <- pseudoinverse(data, ...)
   X$setinverse(inverse)
